@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+/* ===== Design Tokens ===== */
+@theme {
+  --color-primary: #1a3a6b;
+  --color-primary-light: #2a5298;
+  --color-primary-dark: #0f2340;
+  --color-accent: #f59e0b;
+  --color-accent-light: #fbbf24;
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+  --color-surface: #f8fafc;
+  --font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ===== Reset ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-family-base);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--color-surface);
+  color: #1e293b;
+  min-height: 100dvh;
+  line-height: 1.6;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* ===== Page Container — ALL pages use this ===== */
+.page-container {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 24px 64px;
+}
+@media (min-width: 640px) {
+  .page-container {
+    padding: 48px 32px 80px;
+  }
+}
+@media (min-width: 1024px) {
+  .page-container {
+    padding: 56px 40px 96px;
+  }
+}
+
+/* ===== Wide page container for Home ===== */
+.page-container-wide {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* ===== Scrollbar ===== */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ===== High Contrast ===== */
+body.high-contrast { background: #000 !important; color: #fff !important; }
+body.high-contrast .glass-card { background: #111 !important; color: #fff !important; border-color: #fff !important; }
+body.high-contrast button { border: 2px solid #fff !important; color: #fff !important; }
+
+/* ===== Font Size ===== */
+body.font-large  { font-size: 18px; }
+body.font-xlarge { font-size: 22px; }
+
+/* ===== Glass Card ===== */
+.glass-card {
+  background: #ffffff;
+  border: 1px solid #e8ecf1;
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.glass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.08);
+}
+
+/* ===== Buttons — shared base ===== */
+.btn-primary,
+.btn-accent,
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.938rem;
+  line-height: 1.4;
+  cursor: pointer;
+  min-height: 48px;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  color: white;
+  box-shadow: 0 2px 8px rgba(26,58,107,0.25);
+}
+.btn-primary:hover { box-shadow: 0 4px 16px rgba(26,58,107,0.35); transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.btn-accent {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
+  color: #1e293b;
+  box-shadow: 0 2px 8px rgba(245,158,11,0.3);
+}
+.btn-accent:hover { box-shadow: 0 4px 16px rgba(245,158,11,0.4); transform: translateY(-1px); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+.btn-outline:hover { background: var(--color-primary); color: white; }
+
+/* ===== Score Ring ===== */
+.score-ring {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== Hero ===== */
+.hero-gradient {
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 50%, var(--color-primary-light) 100%);
+  color: white;
+}
+
+/* ===== Animations ===== */
+.pulse-animation { animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.05); opacity: 0.85; }
+}
+
+.fade-in { animation: fadeIn 0.4s ease-out both; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.slide-up { animation: slideUp 0.35s ease-out both; }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Camera Frame ===== */
+.camera-frame {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0f172a;
+  aspect-ratio: 4 / 3;
+  max-height: 50vh;
+}
+.camera-frame video,
+.camera-frame canvas,
+.camera-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===== Loading Dots ===== */
+.loading-dots::after { content: ''; animation: dots 1.5s steps(4, end) infinite; }
+@keyframes dots {
+  0%  { content: ''; }
+  25% { content: '.'; }
+  50% { content: '..'; }
+  75% { content: '...'; }
+}
+
+/* ===== Badges ===== */
+.badge-pass {
+  background: #d1fae5; color: #065f46;
+  padding: 6px 14px; border-radius: 999px;
+  font-size: 0.813rem; font-weight: 600; display: inline-block;
+}
+.badge-fail {
+  background: #fee2e2; color: #991b1b;
+  padding: 6px 14px; border-radius: 999px;
+  font-size: 0.813rem; font-weight: 600; display: inline-block;
+}
+
+/* ===== Form Controls ===== */
+input[type="text"],
+textarea,
+select {
+  font-family: var(--font-family-base);
+  font-size: 0.938rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px 16px;
+  background: white;
+  color: #1e293b;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+  width: 100%;
+}
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(26,58,107,0.1);
+}
+
+/* ===== Section spacing helper ===== */
+.section-gap > * + * {
+  margin-top: 24px;
+}
+.section-gap-lg > * + * {
+  margin-top: 32px;
+}
